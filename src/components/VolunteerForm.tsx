@@ -93,7 +93,7 @@ const VolunteerForm: React.FC = () => {
                 onChange={handleChange}
                 required
                 className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Jean"
+                placeholder="Votre prénom"
               />
             </div>
           </div>
@@ -111,7 +111,7 @@ const VolunteerForm: React.FC = () => {
                 onChange={handleChange}
                 required
                 className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Ekpe"
+                placeholder="Votre nom"
               />
             </div>
           </div>
@@ -130,7 +130,7 @@ const VolunteerForm: React.FC = () => {
               onChange={handleChange}
               required
               className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="0197000000"
+              placeholder="Votre numéro de téléphone"
             />
           </div>
         </div>

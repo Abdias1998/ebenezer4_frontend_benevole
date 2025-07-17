@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Trash2, MessageSquare, Phone, Mail, Filter } from 'lucide-react';
 import { Volunteer } from '../types';
 import { api } from '../services/api';
+import Modal from './Modal';
 
 interface VolunteerTableProps {
   volunteers: Volunteer[];
@@ -19,46 +20,87 @@ const sectionLabels = {
 const VolunteerTable: React.FC<VolunteerTableProps> = ({ volunteers, onVolunteerDeleted }) => {
   const [selectedSection, setSelectedSection] = useState<string>('all');
   const [loadingActions, setLoadingActions] = useState<{ [key: string]: boolean }>({});
+  const [modalState, setModalState] = useState<{isOpen: boolean; title: string; message: string; onConfirm?: (inputValue?: string) => void; prompt?: boolean;}>({ 
+    isOpen: false,
+    title: '',
+    message: '',
+    onConfirm: undefined,
+    prompt: false
+  });
 
   const filteredVolunteers = volunteers.filter(volunteer =>
     selectedSection === 'all' || volunteer.section === selectedSection
   );
 
-  const handleDelete = async (id: string) => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer ce bénévole ?')) {
+  const handleDelete = (id: string) => {
+    const confirmDelete = async () => {
       setLoadingActions(prev => ({ ...prev, [`delete-${id}`]: true }));
       try {
         await api.deleteVolunteer(id);
         onVolunteerDeleted(id);
+        setModalState({ isOpen: false, title: '', message: '', onConfirm: undefined });
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
+        setModalState({
+            isOpen: true,
+            title: 'Erreur',
+            message: 'Erreur lors de la suppression du bénévole.',
+            onConfirm: undefined
+        });
       } finally {
         setLoadingActions(prev => ({ ...prev, [`delete-${id}`]: false }));
       }
-    }
+    };
+
+    setModalState({
+        isOpen: true,
+        title: 'Confirmation de suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ce bénévole ?',
+        onConfirm: confirmDelete
+    });
   };
 
-  const handleSendMessage = async (volunteer: Volunteer, type: 'sms' | 'whatsapp' | 'email') => {
-    const message = prompt(`Message ${type === 'sms' ? 'SMS' : type === 'whatsapp' ? 'WhatsApp' : 'Email'} pour ${volunteer.firstName} ${volunteer.lastName}:`);
-    
-    if (message) {
-      const actionKey = `${type}-${volunteer._id}`;
-      setLoadingActions(prev => ({ ...prev, [actionKey]: true }));
-      
-      try {
-        await api.sendMessage({
-          volunteerId: volunteer._id,
-          message,
-          type
-        });
-        alert(`Message ${type} envoyé avec succès !`);
-      } catch (error) {
-        console.error('Erreur lors de l\'envoi:', error);
-        alert('Erreur lors de l\'envoi du message');
-      } finally {
-        setLoadingActions(prev => ({ ...prev, [actionKey]: false }));
+  const handleSendMessage = (volunteer: Volunteer, type: 'sms' | 'whatsapp' | 'email') => {
+    const sendMessage = async (message?: string) => {
+      if (message) {
+        const actionKey = `${type}-${volunteer._id}`;
+        setLoadingActions(prev => ({ ...prev, [actionKey]: true }));
+        
+        try {
+          await api.sendMessage({
+            volunteerId: volunteer._id,
+            message,
+            type
+          });
+          setModalState({
+              isOpen: true,
+              title: 'Succès',
+              message: `Message ${type} envoyé avec succès !`,
+              onConfirm: undefined,
+              prompt: false
+          });
+        } catch (error) {
+          console.error('Erreur lors de l\'envoi:', error);
+          setModalState({
+              isOpen: true,
+              title: 'Erreur',
+              message: 'Erreur lors de l\'envoi du message.',
+              onConfirm: undefined,
+              prompt: false
+          });
+        } finally {
+          setLoadingActions(prev => ({ ...prev, [actionKey]: false }));
+        }
       }
-    }
+    };
+
+    setModalState({
+        isOpen: true,
+        title: `Envoyer un ${type === 'sms' ? 'SMS' : type === 'whatsapp' ? 'WhatsApp' : 'Email'} à ${volunteer.firstName}`,
+        message: `Veuillez saisir le message ci-dessous.`,
+        onConfirm: sendMessage,
+        prompt: true
+    });
   };
 
   const getSectionCount = (section: string) => {
@@ -197,6 +239,16 @@ const VolunteerTable: React.FC<VolunteerTableProps> = ({ volunteers, onVolunteer
           <p className="text-gray-500">Aucun bénévole trouvé pour cette section.</p>
         </div>
       )}
+
+      <Modal 
+        isOpen={modalState.isOpen} 
+        onClose={() => setModalState({ isOpen: false, title: '', message: '', onConfirm: undefined, prompt: false })} 
+        title={modalState.title}
+        onConfirm={modalState.onConfirm}
+        prompt={modalState.prompt}
+      >
+        <p>{modalState.message}</p>
+      </Modal>
     </div>
   );
 };

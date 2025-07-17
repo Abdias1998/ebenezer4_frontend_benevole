@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Bienvenue à <span className="text-blue-600">Ebenezer 4</span>
+            Bienvenue à <span className="text-yellow-600">Ebenezer 4</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8">
             Rejoignez notre équipe de bénévoles d'Ebenezer 4
