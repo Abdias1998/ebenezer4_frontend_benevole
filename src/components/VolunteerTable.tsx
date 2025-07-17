@@ -112,7 +112,7 @@ const VolunteerTable: React.FC<VolunteerTableProps> = ({ volunteers, onVolunteer
       <div className="px-6 py-4 bg-gray-50 border-b">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-gray-900">
-            Bénévoles inscrits ({filteredVolunteers.length})
+          Volontaires inscrits ({filteredVolunteers.length})
           </h3>
           
           <div className="flex items-center space-x-2">

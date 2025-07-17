@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Users, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
+import logo from '../assets/logo.jpeg';
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -16,14 +17,8 @@ const Header: React.FC = () => {
     <header className="bg-white shadow-md border-b-4 border-yellow-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-              <Users className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-blue-600">Ebenezer 4</h1>
-              <p className="text-sm text-gray-600">Inscription Bénévoles</p>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="Ebenezer 4 Logo" className="h-12 w-12 rounded-full object-cover" />
           </Link>
 
           <nav className="flex items-center space-x-4">

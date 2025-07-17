@@ -46,7 +46,7 @@ const AdminPage: React.FC = () => {
 
     return [
       {
-        title: 'Total Bénévoles',
+        title: 'Total Volontaires',
         value: totalVolunteers,
         icon: Users,
         color: 'blue'
@@ -84,7 +84,7 @@ const AdminPage: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard Administration</h1>
-          <p className="text-gray-600">Gestion des bénévoles Ebenezer 4</p>
+          <p className="text-gray-600">Gestion des Volontaires Ebenezer 4</p>
         </div>
 
         {/* Statistiques */}

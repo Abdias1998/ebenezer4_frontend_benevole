@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
             Bienvenue à <span className="text-yellow-600">Ebenezer 4</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Rejoignez notre équipe de bénévoles d'Ebenezer 4
+            Rejoignez notre équipe de volontaires d'Ebenezer 4
           </p>
           {/* <div className="flex items-center justify-center space-x-8 text-sm text-gray-500 mb-8">
             <div className="flex items-center space-x-2">
