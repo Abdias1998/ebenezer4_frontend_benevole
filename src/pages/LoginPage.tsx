@@ -96,6 +96,8 @@ const LoginPage: React.FC = () => {
             {isLoading ? 'Connexion...' : 'Se connecter'}
           </button>
         </form>
+
+       
       </div>
     </div>
   );
