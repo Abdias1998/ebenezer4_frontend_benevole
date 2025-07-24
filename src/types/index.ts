@@ -3,9 +3,9 @@ export interface Volunteer {
   firstName: string;
   lastName: string;
   phone: string;
-  denomination: string;
+  // denomination: string;
   section: 'accueil' | 'organisation' | 'sécurité' | 'staff' | 'transport';
-  isBornAgain: boolean;
+  // isBornAgain: boolean;
   registeredAt: string;
 }
 

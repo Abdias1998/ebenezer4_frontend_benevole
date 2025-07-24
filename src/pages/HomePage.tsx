@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import VolunteerForm from '../components/VolunteerForm';
 
 const HomePage: React.FC = () => {
-  const [showMaintenance, setShowMaintenance] = useState(true);
+  const [showMaintenance, setShowMaintenance] = useState(false);
 
   useEffect(() => {
     // You can add logic here to check maintenance status from an API if needed

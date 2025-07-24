@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Phone, Church, Users, CheckCircle } from 'lucide-react';
+import { User, Phone, Users, CheckCircle } from 'lucide-react';
 import { api } from '../services/api';
 import { Volunteer } from '../types';
 
@@ -16,9 +16,9 @@ const VolunteerForm: React.FC = () => {
     firstName: '',
     lastName: '',
     phone: '',
-    denomination: '',
+    // denomination: '',
     section: 'accueil' as Volunteer['section'],
-    isBornAgain: false
+    // isBornAgain: false
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -34,9 +34,9 @@ const VolunteerForm: React.FC = () => {
         firstName: '',
         lastName: '',
         phone: '',
-        denomination: '',
+        // denomination: '',
         section: 'accueil',
-        isBornAgain: false
+        // isBornAgain: false
       });
     } catch (error) {
       console.error('Erreur lors de l\'inscription:', error);
@@ -135,7 +135,7 @@ const VolunteerForm: React.FC = () => {
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Dénomination *
           </label>
@@ -151,7 +151,7 @@ const VolunteerForm: React.FC = () => {
               placeholder="Votre denomination"
             />
           </div>
-        </div>
+        </div> */}
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -175,7 +175,7 @@ const VolunteerForm: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <input
             type="checkbox"
             name="isBornAgain"
@@ -186,7 +186,7 @@ const VolunteerForm: React.FC = () => {
           <label className="ml-2 text-sm text-gray-700">
             Chrétien né de nouveau ?
           </label>
-        </div>
+        </div> */}
 
         <button
           type="submit"

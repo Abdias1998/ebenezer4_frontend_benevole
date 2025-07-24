@@ -38,7 +38,7 @@ const AdminPage: React.FC = () => {
 
   const getStatsCards = () => {
     const totalVolunteers = volunteers.length;
-    const bornAgainCount = volunteers.filter(v => v.isBornAgain).length;
+    // const bornAgainCount = volunteers.filter(v => v.isBornAgain).length;
     const sectionCounts = volunteers.reduce((acc, volunteer) => {
       acc[volunteer.section] = (acc[volunteer.section] || 0) + 1;
       return acc;
@@ -53,8 +53,8 @@ const AdminPage: React.FC = () => {
       },
       {
         title: 'Chrétiens nés de nouveau',
-        value: bornAgainCount,
-        percentage: totalVolunteers > 0 ? Math.round((bornAgainCount / totalVolunteers) * 100) : 0,
+        // value: bornAgainCount,
+        // percentage: totalVolunteers > 0 ? Math.round((bornAgainCount / totalVolunteers) * 100) : 0,
         icon: BarChart3,
         color: 'green'
       },
@@ -96,12 +96,12 @@ const AdminPage: React.FC = () => {
                   <p className="text-sm font-medium text-gray-600">{stat.title}</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {stat.value}
-                    {stat.percentage && (
+                    {/* {stat.percentage && (
                       <span className="text-sm text-gray-500 ml-1">({stat.percentage}%)</span>
                     )}
                     {stat.count && (
                       <span className="text-sm text-gray-500 ml-1">({stat.count})</span>
-                    )}
+                    )} */}
                   </p>
                 </div>
                 <div className={`p-3 rounded-full bg-${stat.color}-100`}>
@@ -131,9 +131,9 @@ const AdminPage: React.FC = () => {
                     v.firstName,
                     v.lastName,
                     v.phone,
-                    v.denomination,
+                    // v.denomination,
                     v.section,
-                    v.isBornAgain ? 'Oui' : 'Non',
+                    // v.isBornAgain ? 'Oui' : 'Non',
                     new Date(v.registeredAt).toLocaleDateString('fr-FR')
                   ])
                 ].map(row => row.join(',')).join('\n');
